@@ -30,11 +30,12 @@ public static void main(String[] args) {
 JFrame f1 = new JFrame();
 void v() {
 	JFrame f1 = new JFrame();
+	f1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	f1.setTitle("PongAway");
 	 f1.setVisible(true);
 	 f1.getContentPane().setPreferredSize(new Dimension(gameWidth, gameHeight));
 	f1.addKeyListener(p1);
-	 
+	 f1.add(p1);
 	 f1.pack();
 	 
 }
