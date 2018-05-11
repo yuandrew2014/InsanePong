@@ -24,7 +24,8 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 
 	final int HIGH_STATE = 3;
 	int currentState = MENU_STATE;
-
+	Gamemanager gm;
+	
 	public PongPanel() {
 		this.player = new Player1(5,400,50,120);
 		this.t1 = new Timer(1000 / 60, this);
@@ -32,6 +33,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 		this.titleFont2 = new Font("Arial",Font.PLAIN,24);
 		this.titleFont3= new Font("Arial",Font.PLAIN,24);
 		this.titleFont4 = new Font("Arial",Font.PLAIN,24);
+		this.gm = new Gamemanager(player);
 	}
 
 	@Override
@@ -137,7 +139,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 		g.setColor(Color.BLACK);
 		
 		g.setFont(titleFont);
-		g.drawString("Pong",350,400);
+		g.drawString("Collect the Rain",250,400);
 		g.setFont(titleFont2);
 		g.drawString("Click E to initiate easy mode",250,440);
 		g.setFont(titleFont3);
@@ -147,7 +149,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	void updateGameState() {
-player.update();
+gm.update();
 	}
 
 	void drawGameState(Graphics g) {
@@ -155,7 +157,7 @@ player.update();
 
 		g.fillRect(0, 0, pong.gameWidth, pong.gameHeight);
 		g.setColor(Color.WHITE);
-		player.draw(g);
+		gm.draw(g);
 	}
 
 	void updateEndState() {

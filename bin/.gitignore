@@ -1,9 +1,9 @@
+/Ball.class
+/BallManager.class
+/Player1.class
 /PongObject.class
 /PongPanel.class
 /pong$1.class
 /pong.class
-/PlayerPadel.class
-/Player.class
-/Player1.class
-/Ball.class
-/BallManager.class
+/Rain.class
+/Gamemanager.class
