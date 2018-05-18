@@ -8,7 +8,7 @@ public class Player1 extends PongObject{
 		// TODO Auto-generated constructor stub
 	}
 	void update() {
-		
+		 super.update();
 		
 	}
 	void draw(Graphics g) {

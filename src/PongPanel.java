@@ -95,12 +95,12 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
-		if (e.getKeyCode() == KeyEvent.VK_UP) {
-			player.y -= 40;
+		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+			player.x -= 40;
 		
 		}
-		else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-			player.y += 40;
+		else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+			player.x += 40;
 		
 		}
 	}
@@ -135,7 +135,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 
 	void drawMenuState(Graphics g) {
 		g.setColor(Color.ORANGE);
-		g.fillRect(0, 0, pong.gameWidth, pong.gameHeight);
+		g.fillRect(0, 0, RainGame.gameWidth, RainGame.gameHeight);
 		g.setColor(Color.BLACK);
 		
 		g.setFont(titleFont);
@@ -150,12 +150,13 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 
 	void updateGameState() {
 gm.update();
+gm.manageEnemies();
 	}
 
 	void drawGameState(Graphics g) {
 		g.setColor(Color.BLACK);
 
-		g.fillRect(0, 0, pong.gameWidth, pong.gameHeight);
+		g.fillRect(0, 0, RainGame.gameWidth, RainGame.gameHeight);
 		g.setColor(Color.WHITE);
 		gm.draw(g);
 	}
@@ -167,7 +168,7 @@ gm.update();
 	void drawEndState(Graphics g) {
 		g.setColor(Color.RED);
 
-		g.fillRect(0, 0, pong.gameWidth, pong.gameHeight);
+		g.fillRect(0, 0, RainGame.gameWidth, RainGame.gameHeight);
 	}
 
 	void updateHighState() {
@@ -177,6 +178,6 @@ gm.update();
 	void drawHighState(Graphics g) {
 		g.setColor(Color.GREEN);
 
-		g.fillRect(0, 0, pong.gameWidth, pong.gameHeight);
+		g.fillRect(0, 0, RainGame.gameWidth, RainGame.gameHeight);
 	}
 }

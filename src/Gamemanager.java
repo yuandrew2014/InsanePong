@@ -1,9 +1,17 @@
 import java.awt.Graphics;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class Gamemanager {
+	long rainTimer;
+	 int rainSpawnTime;
+	List<Rain>rains = new ArrayList<>();
 Player1 p1;
 Gamemanager(Player1 p ){
 	p1 = p;
+	rainTimer= 0;
+	rainSpawnTime = 3000;
 }
 void update() {
 	if (p1 == null) {
@@ -12,9 +20,51 @@ void update() {
 	else {
 		p1.update();
 	}
-	
+	for (int i = 0; i < rains.size(); i++) {
+		Rain r = rains.get(i);
+		r.update();
+	}
 }
 void draw(Graphics g) {
 	p1.draw(g);
+	for (int i = 0; i < rains.size(); i++) {
+		Rain r = rains.get(i);
+		r.draw(g);
+	}
+}
+void addRain(Rain r1){
+	rains.add(r1);
+}
+public void manageEnemies(){
+    if(System.currentTimeMillis() - rainTimer >= rainSpawnTime){
+            addRain(new Rain(new Random().nextInt(RainGame.gameWidth), 0, 50, 50));
+
+rainTimer = System.currentTimeMillis();
+    }
+}
+void purgeRain() {
+	for (int i = 0; i < rains.size(); i++) {
+		if (rains.get(i).isAlive == false) {
+			rains.remove(i);
+		}
+	}
+	
+}
+void checkCollision() {
+	for(Rain a : rains){
+
+        if(p1.collisionBox.intersects(a.collisionBox)){
+
+                p1.isAlive = true;
+System.out.println("boom");
+        }
+        for (int i = 0; i< rains.size(); i++) {
+			if (rains.get(i).collisionBox.intersects(a.collisionBox)) {
+				rains.remove(i);
+			}
+		}
+
 }
 }
+}
+

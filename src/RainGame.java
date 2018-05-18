@@ -4,10 +4,10 @@ import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
 
-public class pong {
+public class RainGame {
 	PongPanel p1;
 
-	public pong() {
+	public RainGame() {
 	// TODO Auto-generated constructor stub
 		this.p1 = new PongPanel();
 		setup();
@@ -19,7 +19,7 @@ public static void main(String[] args) {
 		
 		@Override
 		public void run() {
-			pong p = new pong();
+			RainGame p = new RainGame();
 			p.v();
 		}
 	});
