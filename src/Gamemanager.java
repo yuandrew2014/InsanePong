@@ -6,12 +6,13 @@ import java.util.Random;
 public class Gamemanager {
 	long rainTimer;
 	 int rainSpawnTime;
+	 int score;
 	List<Rain>rains = new ArrayList<>();
 Player1 p1;
 Gamemanager(Player1 p ){
 	p1 = p;
 	rainTimer= 0;
-	rainSpawnTime = 3000;
+	rainSpawnTime = 700;
 }
 void update() {
 	if (p1 == null) {
@@ -50,21 +51,25 @@ void purgeRain() {
 	}
 	
 }
+
 void checkCollision() {
 	for(Rain a : rains){
-
-        if(p1.collisionBox.intersects(a.collisionBox)){
-
-                p1.isAlive = true;
-System.out.println("boom");
-        }
+if (a.y >= 700) {
+	System.out.println("passed");
+	p1.isAlive = false;
+	a.isAlive = false;
+}
+      }
+	
         for (int i = 0; i< rains.size(); i++) {
-			if (rains.get(i).collisionBox.intersects(a.collisionBox)) {
+			if (rains.get(i).collisionBox.intersects(p1.collisionBox)) {
+				
 				rains.remove(i);
+				score++;
 			}
 		}
-
-}
+        
+        
 }
 }
 

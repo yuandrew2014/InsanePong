@@ -8,7 +8,7 @@ Rain(int x, int y, int width, int height){
 }
 void update() {
 	 super.update();
-	y++;
+	y+=5;
 }
 void draw(Graphics g) {
 	g.setColor(Color.GREEN);

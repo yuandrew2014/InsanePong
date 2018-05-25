@@ -16,13 +16,15 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 	Font titleFont2;
 	Font titleFont3;
 	Font titleFont4;
+	Font endFont;
+	;
 	final int MENU_STATE = 0;
 
 	final int GAME_STATE = 1;
 
 	final int END_STATE = 2;
 
-	final int HIGH_STATE = 3;
+	
 	int currentState = MENU_STATE;
 	Gamemanager gm;
 	
@@ -33,6 +35,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 		this.titleFont2 = new Font("Arial",Font.PLAIN,24);
 		this.titleFont3= new Font("Arial",Font.PLAIN,24);
 		this.titleFont4 = new Font("Arial",Font.PLAIN,24);
+		this.endFont = new Font("Arial", Font.PLAIN,24);
 		this.gm = new Gamemanager(player);
 	}
 
@@ -49,10 +52,6 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 		} else if (currentState == END_STATE) {
 
 		drawEndState(g);
-
-		} else if (currentState == HIGH_STATE) {
-
-		drawHighState(g);
 
 		}
 	}
@@ -72,13 +71,12 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 
 			updateEndState();
 
-		} else if (currentState == HIGH_STATE) {
-
-			updateHighState();
-
 		}
 
-		
+		if (player.isAlive == false) {
+			currentState 
+			= END_STATE;
+		}
 		repaint();
 	}
 
@@ -95,12 +93,13 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
+		
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-			player.x -= 40;
+			player.x -= 80;
 		
 		}
 		else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-			player.x += 40;
+			player.x += 80;
 		
 		}
 	}
@@ -112,20 +111,17 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
 
-		if (e.getKeyCode() == 10) {
+		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 			System.out.println(currentState);
 			currentState += 1;
 
+
 			if (currentState > END_STATE) {
-
+				player.isAlive = true;
 				currentState = MENU_STATE;
 
 			}
-			if (currentState > HIGH_STATE) {
-
-				currentState = MENU_STATE;
-
-			}
+			
 		}
 	}
 
@@ -151,6 +147,9 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 	void updateGameState() {
 gm.update();
 gm.manageEnemies();
+gm.checkCollision();
+gm.purgeRain();
+
 	}
 
 	void drawGameState(Graphics g) {
@@ -167,8 +166,11 @@ gm.manageEnemies();
 
 	void drawEndState(Graphics g) {
 		g.setColor(Color.RED);
-
 		g.fillRect(0, 0, RainGame.gameWidth, RainGame.gameHeight);
+		g.setColor(Color.DARK_GRAY);
+		g.setFont(endFont);
+		g.drawString("your score is : " + gm.score,370 , 400);
+		
 	}
 
 	void updateHighState() {
