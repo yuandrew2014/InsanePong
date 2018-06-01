@@ -12,7 +12,7 @@ Player1 p1;
 Gamemanager(Player1 p ){
 	p1 = p;
 	rainTimer= 0;
-	rainSpawnTime = 700;
+	rainSpawnTime = 1000;
 }
 void update() {
 	if (p1 == null) {
